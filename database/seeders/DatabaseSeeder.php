@@ -1,6 +1,4 @@
-
 <?php
-
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
@@ -11,7 +9,7 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        // Do not insert duplicate demo records
+        // Prevent duplicate records
         if (
             DB::table('users')->exists() ||
             DB::table('tasks')->exists()
@@ -21,7 +19,7 @@ class DatabaseSeeder extends Seeder
 
         $today = Carbon::today();
 
-        // Insert exactly one demo user
+        // Insert one demo user
         DB::table('users')->insert([
             'username' => 'alyanah',
             'full_name' => 'Alyanah Louise Nofuente',
