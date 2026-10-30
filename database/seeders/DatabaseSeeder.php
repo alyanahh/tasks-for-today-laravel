@@ -1,4 +1,6 @@
+
 <?php
+
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
@@ -9,14 +11,17 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        // Clear existing records
-        DB::table('tasks')->delete();
-        DB::table('users')->delete();
+        // Do not insert duplicate demo records
+        if (
+            DB::table('users')->exists() ||
+            DB::table('tasks')->exists()
+        ) {
+            return;
+        }
 
-        // Get today's date
         $today = Carbon::today();
 
-        // Insert exactly one user
+        // Insert exactly one demo user
         DB::table('users')->insert([
             'username' => 'alyanah',
             'full_name' => 'Alyanah Louise Nofuente',
@@ -25,7 +30,7 @@ class DatabaseSeeder extends Seeder
             'updated_at' => now(),
         ]);
 
-        // Insert 8 sample tasks
+        // Insert eight sample tasks
         DB::table('tasks')->insert([
             [
                 'title' => 'Review Web System Technologies notes',
